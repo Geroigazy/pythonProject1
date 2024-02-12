@@ -1,4 +1,8 @@
+import uuid
+from django.contrib.auth import get_user_model
 from django.db import models
+
+
 
 
 class Category(models.Model):
@@ -10,5 +14,8 @@ class Product(models.Model):
     price = models.FloatField(default=0, null=False)
     description = models.TextField()
     quantity = models.IntegerField(default=0, null=False)
-    category_id = models.ForeignKey(Category, on_delete = models.CASCADE)
-    is_active = models.BooleanField(default=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
+    is_active = models.BooleanField(default=True)
+
+
+
