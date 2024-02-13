@@ -1,0 +1,16 @@
+http://localhost:8000/api/products/
+http://localhost:8000/api/products/1/
+http://localhost:8000/api/products/1/buy
+
+http://localhost:8000/api/categories/
+http://localhost:8000/api/categories/1
+http://localhost:8000/api/categories/1/products
+
+http://localhost:8000/users/login/ POST
+http://localhost:8000/users/register/ POST
+http://localhost:8000/users/<uuid:user_id>/orders GET
+
+http://127.0.0.1:8000/order/
+http://127.0.0.1:8000/order/<uuid:id>/
+
+
