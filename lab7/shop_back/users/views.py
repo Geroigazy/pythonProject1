@@ -3,9 +3,12 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import AccessToken
-from rest_framework import status
+from rest_framework import status, permissions
 from . import serializers, exceptions
+from order.models import Order
+from order.serializers import OrderSerializer
 from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 
@@ -15,6 +18,8 @@ class UserViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'create_token':
             return serializers.CreateUserToken
+        elif self.action == 'create':
+            return serializers.UserRegistrationSerializer
         
         return serializers.UserSerializer
 
@@ -40,3 +45,9 @@ class UserViewSet(ModelViewSet):
         }, status=status.HTTP_201_CREATED)   
 
 
+    @action(detail=True, url_path='orders', methods=('GET',))
+    def get_orders(self, request, pk=None):
+        user = self.get_object()
+        orders = Order.objects.filter(user_id=user.id)
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

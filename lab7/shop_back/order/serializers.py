@@ -8,3 +8,9 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
         fields = '__all__'
+
+class OrderCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Order
+        fields = ['product_id']

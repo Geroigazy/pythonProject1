@@ -9,6 +9,6 @@ User = get_user_model()
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, default='1')
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     created_at = models.DateTimeField(auto_now_add=True)
